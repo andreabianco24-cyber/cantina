@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cantina 🍷</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cantina">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🍷 Cantina</h1>
+    <div class="actions">
+      <button id="export-json">Export JSON</button>
+      <button id="export-csv">Export CSV</button>
+      <label class="import-btn">
+        Importa
+        <input id="import-file" type="file" accept=".json,.csv" hidden>
+      </label>
+      <button id="clear">Svuota</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Aggiungi bottiglia</h2>
+      <div class="grid">
+        <label>Numero*<input id="f-number" placeholder="Es. 12"></label>
+        <label>Nome*<input id="f-name" placeholder="Es. Barolo Rocche"></label>
+        <label>Posizione<input id="f-location" placeholder="Es. Fila 1 / Linea 3"></label>
+        <label>Annata<input id="f-vintage" placeholder="Es. 2016"></label>
+        <label>Vitigno<input id="f-grape" placeholder="Es. Nebbiolo"></label>
+        <label class="wide">Note<input id="f-notes" placeholder="Es. Da aprire 2026"></label>
+        <div class="wide">
+          <button id="add" class="primary">Aggiungi</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="searchbar">
+        <input id="q" placeholder="Cerca per numero o nome (separa più termini con virgole)">
+        <label><input type="checkbox" id="exact"> Corrispondenza esatta</label>
+        <span id="count" class="muted"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table id="table">
+          <thead>
+            <tr>
+              <th># Numero</th>
+              <th>Nome</th>
+              <th>Posizione</th>
+              <th>Annata</th>
+              <th>Vitigno</th>
+              <th>Note</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer muted">
+      Suggerimento: puoi cercare più termini separati da virgole (es. "12, barolo"). L'app funziona <strong>offline</strong> se aggiunta alla schermata Home.
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
